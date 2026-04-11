@@ -5,7 +5,7 @@ class Budget:
         self.debts=[] # stores all the debts
         self.savings = [] # stores all the savings
 
-
+# This function adds income 
     def add_income(self, source, amount):
         self.incomes.append({ "source":source, "amount": amount,})
         
