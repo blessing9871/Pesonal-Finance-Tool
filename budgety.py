@@ -98,7 +98,7 @@ while True:
                 continue    
             my_budget.add_income(source, amount)
             print("Income added")
-            print(f"Total income so far: P{my_budget.total_income()}")
+            print(f"Total income so far: P{my_budget.total_income() : .2f}")
 
     elif choice == "2":
         category = input("Enter expens category: ")
