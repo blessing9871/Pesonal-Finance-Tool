@@ -84,15 +84,21 @@ while True:
         break
 
     elif choice == "1":
-        source = input("Enter income source: ")
+        print("==== ADD INCOME ====")
+        while True:
+            source = input("Enter income source :(Enter done to exit enter income) ")
+            if source.lower() == "done":
+                break
         
-        try:
-            amount = float(input("Enter income amount: "))
+            try:
+                amount = float(input("Enter income amount: "))
         
-        except ValueError:
-            print("Invalid Number")
-            continue    
-        my_budget.add_income(source, amount)
+            except ValueError:
+                print("Invalid Number")
+                continue    
+            my_budget.add_income(source, amount)
+            print("Income added")
+            print(f"Total income so far: P{my_budget.total_income()}")
 
     elif choice == "2":
         category = input("Enter expens category: ")
