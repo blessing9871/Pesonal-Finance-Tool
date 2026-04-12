@@ -85,7 +85,13 @@ while True:
 
     elif choice == "1":
         source = input("Enter income source: ")
-        amount = float(input("Enter income amount: "))
+        
+        try:
+            amount = float(input("Enter income amount: "))
+        
+        except ValueError:
+            print("Invalid Number")
+            continue    
         my_budget.add_income(source, amount)
 
     elif choice == "2":
