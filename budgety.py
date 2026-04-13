@@ -1,9 +1,33 @@
+import json
+
 class Budget:
     def __init__(self):
         self.incomes = [] #stores all the incomes
         self.expenses = [] #stores all the expenses
         self.debts=[] # stores all the debts
         self.savings = [] # stores all the savings
+
+    def save_to_file(self, filename = "budget_data.json"):
+        data = {
+            "incomes":self.incomes,
+            "expenses":self.expenses,
+            "debts":self.debts,
+            "savings":self.savings
+        }
+
+        with open(filename, "w") as file:
+            json.dump(data, file, indent = 4)
+
+    def load_from_file(self, filename="budget_data.json"):
+        try:
+            with open(filename, "r") as file:
+                data = json.load(file)
+                self.incomes = data.get("incomes", [])
+                self.expenses = data.get("expenses", [])
+                self.debts = data.get("debts", [])
+                self.savings = data.get("savings", [])
+        except FileNotFoundError:
+            print("No previous data found. Starting fresh.")
 
 # This function adds income 
     def add_income(self, source, amount):
@@ -15,7 +39,7 @@ class Budget:
     def show_incomes(self):
         print("\n === INCOME ===")
         for i in self.incomes:
-            print(f"{i['source']}:P{i['amount']}")
+            print(f"{i['source']}:P{i['amount']:.2f}")
 
     def add_expense(self, amount, category, expense_type):
         self.expenses.append({
@@ -30,7 +54,7 @@ class Budget:
     def show_expenses(self):
         print("\n === EXPENSES ===")
         for e in self.expenses:
-            print(f"{e['category']} : {e['type']} : P{e['amount']}")
+            print(f"{e['category']} : {e['type']} : P{e['amount']:.2f}")
     
     def balance(self):
         return self.total_income() - self.total_expenses()
@@ -44,7 +68,7 @@ class Budget:
     def show_debts(self):
         print("\n === DEBTS ===")
         for d in self.debts:
-            print(f"{d['debt_name']}:P{d['amount']}")
+            print(f"{d['debt_name']}:P{d['amount']:.2f}")
 
     def add_savings(self, name, target_amount, saved_amount):
         self.savings.append({
@@ -60,13 +84,14 @@ class Budget:
         print("\n === SAVINGS ===")
         for s in self.savings:
             amount_left = s["target"] - s["saved"]
-            print(f"{s['name']} : Saved P{s['saved']}: Left P{amount_left}")
+            print(f"{s['name']} : Saved P{s['saved']:.2f}: Left P{amount_left:.2f}")
 
     def total_savings_left(self):
         return sum(s["target"] - s["saved"] for s in self.savings)
 
 
 my_budget = Budget()
+my_budget.load_from_file()
 
 while True:
     print("\n==== WELCOME TO BUDGETY ====")
@@ -80,7 +105,8 @@ while True:
     choice = input("Choose an option: ")
 
     if choice == "6":
-        print("Goodbye!")
+        my_budget.save_to_file()
+        print(" Data saved. Goodbye!")
         break
 
     elif choice == "1":
@@ -97,6 +123,7 @@ while True:
                 print("Invalid Number")
                 continue    
             my_budget.add_income(source, amount)
+            my_budget.save_to_file()
             print("Income added")
             print(f"Total income so far: P{my_budget.total_income() : .2f}")
 
@@ -114,6 +141,7 @@ while True:
                 print("Invalid Number, please try again.")
                 continue
             my_budget.add_expense(amount, category, expense_type)
+            my_budget.save_to_file()
             print("Expense added")
             print(f"Total Expenses so far: P{my_budget.total_expenses() : .2f}")
 
@@ -132,6 +160,7 @@ while True:
                 print("Invalid Number, please try again.")
                 continue
             my_budget.add_debt(debt_name, amount)
+            my_budget.save_to_file()
             print("Debt added")
             print(f"Total Expenses so far: P{my_budget.total_debts() : .2f}")
 
@@ -153,6 +182,7 @@ while True:
                 print("Invalid Number, please try again.")
                 continue
             my_budget.add_savings(name, target_amount, saved_amount)
+            my_budget.save_to_file()
             print("Saving's Goal added")
             print(f"Total saved so far: P{my_budget.total_savings() : .2f}")
             print(f"Total left to save so far: P{my_budget.total_savings_left() : .2f}")
