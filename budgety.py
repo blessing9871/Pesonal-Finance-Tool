@@ -131,9 +131,9 @@ while True:
             except ValueError:
                 print("Invalid Number, please try again.")
                 continue
-        my_budget.add_debt(debt_name, amount)
-        print("Debt added")
-        print(f"Total Expenses so far: P{my_budget.total_debts() : .2f}")
+            my_budget.add_debt(debt_name, amount)
+            print("Debt added")
+            print(f"Total Expenses so far: P{my_budget.total_debts() : .2f}")
 
     elif choice == "4":
         print("==== ADD SAVINGS ====")
@@ -155,7 +155,7 @@ while True:
             my_budget.add_savings(name, target_amount, saved_amount)
             print("Saving's Goal added")
             print(f"Total saved so far: P{my_budget.total_savings() : .2f}")
-            print(f"Total Total left to save so far: P{my_budget.total_savings_left() : .2f}")
+            print(f"Total left to save so far: P{my_budget.total_savings_left() : .2f}")
 
 
 
@@ -168,11 +168,11 @@ while True:
         
         print("==== SUMMARY ====")
 
-        print("Your total income is : P", my_budget.total_income())
-        print("The total amount of expenses is:", my_budget.total_expenses())
-        print("The total amount of debts is:", my_budget.total_debts())
-        print("Total Saved:", my_budget.total_savings())
-        print("Total Left to Save:", my_budget.total_savings_left())
+        print(f"Your total income is : P{my_budget.total_income() : .2f}")
+        print(f"The total amount of expenses is: P{my_budget.total_expenses() : .2f}")
+        print(f"The total amount of debts is:P{my_budget.total_debts() : .2f}")
+        print(f"Total Saved:P{my_budget.total_savings() :.2f}")
+        print(f"Total Left to Save:P{my_budget.total_savings_left():.2f}")
 
         print("\n === BALANCE ===")
-        print("The balance is : P",my_budget.balance())
+        print(f"The balance is : P {my_budget.balance():.2f}")
