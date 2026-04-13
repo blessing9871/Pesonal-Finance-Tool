@@ -101,10 +101,21 @@ while True:
             print(f"Total income so far: P{my_budget.total_income() : .2f}")
 
     elif choice == "2":
-        category = input("Enter expens category: ")
+        print("==== ADD EXPENSE ====")
+        while True:
+            category = input("Enter expens category: ")
+            if category.lower() == "done":
+                break
         expense_type = input("Enter expense type: ")
-        amount = float(input("Enter the expense amount: "))
+
+        try:
+            amount = float(input("Enter the expense amount: "))
+        except ValueError:
+            print("Invalid Number, please try again.")
+            continue
         my_budget.add_expense(amount, category, expense_type)
+        print("Expense added")
+        print(f"Total Expenses so far: P{my_budget.total_expenses() : .2f}")
 
     elif choice == "3":
         debt_name = input(" Add the name of your debt: ")
