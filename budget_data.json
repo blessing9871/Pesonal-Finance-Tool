@@ -7,6 +7,10 @@
         {
             "source": "Gift",
             "amount": 3000.0
+        },
+        {
+            "source": "Rentals",
+            "amount": 4000.0
         }
     ],
     "expenses": [

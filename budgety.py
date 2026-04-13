@@ -187,8 +187,6 @@ while True:
             print(f"Total saved so far: P{my_budget.total_savings() : .2f}")
             print(f"Total left to save so far: P{my_budget.total_savings_left() : .2f}")
 
-
-
     elif choice == "5":
 
         my_budget.show_incomes()    
