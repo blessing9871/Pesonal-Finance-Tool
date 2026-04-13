@@ -103,30 +103,61 @@ while True:
     elif choice == "2":
         print("==== ADD EXPENSE ====")
         while True:
-            category = input("Enter expens category: ")
+            category = input("Enter expense category: ")
             if category.lower() == "done":
                 break
-        expense_type = input("Enter expense type: ")
+            expense_type = input("Enter expense type: ")
 
-        try:
-            amount = float(input("Enter the expense amount: "))
-        except ValueError:
-            print("Invalid Number, please try again.")
-            continue
-        my_budget.add_expense(amount, category, expense_type)
-        print("Expense added")
-        print(f"Total Expenses so far: P{my_budget.total_expenses() : .2f}")
+            try:
+                amount = float(input("Enter the expense amount: "))
+            except ValueError:
+                print("Invalid Number, please try again.")
+                continue
+            my_budget.add_expense(amount, category, expense_type)
+            print("Expense added")
+            print(f"Total Expenses so far: P{my_budget.total_expenses() : .2f}")
 
     elif choice == "3":
-        debt_name = input(" Add the name of your debt: ")
-        amount = float(input("Please enter the amount of the debt: "))
+        print("==== ADD DEBT ====")
+
+        while True:
+            debt_name = input(" Add the name of your debt: ")
+            if debt_name.lower() == "done":
+                break
+
+            try:
+                amount = float(input("Please enter the amount of the debt: "))
+
+            except ValueError:
+                print("Invalid Number, please try again.")
+                continue
         my_budget.add_debt(debt_name, amount)
+        print("Debt added")
+        print(f"Total Expenses so far: P{my_budget.total_debts() : .2f}")
 
     elif choice == "4":
-        name = input("Add savings name goal: ")
-        target_amount = float(input("Please enter your target amount: "))
-        saved_amount = float(input("Please enter your saved amount so far: "))
-        my_budget.add_savings(name, target_amount, saved_amount)
+        print("==== ADD SAVINGS ====")
+
+        while True:
+            name = input("Add savings name goal: ")
+            if name.lower() == "done":
+                break
+            try:
+                target_amount = float(input("Please enter your target amount: "))
+            except ValueError:
+                print("Invalid number, please try again")
+                continue
+            try:
+                saved_amount = float(input("Please enter your saved amount so far: "))
+            except ValueError:
+                print("Invalid Number, please try again.")
+                continue
+            my_budget.add_savings(name, target_amount, saved_amount)
+            print("Saving's Goal added")
+            print(f"Total saved so far: P{my_budget.total_savings() : .2f}")
+            print(f"Total Total left to save so far: P{my_budget.total_savings_left() : .2f}")
+
+
 
     elif choice == "5":
 
